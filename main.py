@@ -3,9 +3,9 @@ import pygame
 
 screen = pygame.display.set_mode((800, 480))
 pygame.display.set_caption("The hero`s mistake")
-icon=pygame.image.load("./assets/icon.png")
+icon=pygame.image.load("./pyweek1/assets/icon.png")
 pygame.display.set_icon(icon)
-background=pygame.image.load("./assets/background.png")
+background=pygame.image.load("./pyweek1/assets/background.png")
 fps=60
 
 class Hero:
@@ -13,7 +13,7 @@ class Hero:
         self.x = x
         self.y = y
         self.speed = speed
-        self.image = pygame.image.load("./assets/hero.gif")    
+        self.image = pygame.image.load("./pyweek1/assets/hero.gif")    
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
