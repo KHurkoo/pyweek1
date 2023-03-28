@@ -66,7 +66,7 @@ while True:
 
     # Update the game state here
 
-    # Update the score here
+    # Score is updated here
 
     
     screen.fill((255, 255, 255))
