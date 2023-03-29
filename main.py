@@ -32,7 +32,7 @@ def generate_chunk(x,y):
             target_x = x * CHUNK_SIZE + x_pos
             target_y = y * CHUNK_SIZE + y_pos
             tile_type = 0 # nothing
-            height = int(noise.pnoise1(target_x * 0.1, repeat=1) * 5)
+            height = int(noise.pnoise1(target_x * 0.1, repeat=99999) * 5)
             if target_y > 8 - height:
                 tile_type = 2 # dirt
             elif target_y == 8 - height:
@@ -55,8 +55,8 @@ def load_animation(path,frame_durations):
     n = 0
     for frame in frame_durations:
         animation_frame_id = animation_name + '_' + str(n)
-        img_loc = path + '/' + animation_frame_id + '.gif'
-        # player_animations/idle/idle_0.gif
+        img_loc = path + '/' + animation_frame_id + '.png'
+        # player_animations/idle/idle_0.png
         animation_image = pygame.image.load(img_loc).convert()
         animation_image.set_colorkey((255,255,255))
         animation_frames[animation_frame_id] = animation_image.copy()
@@ -64,22 +64,22 @@ def load_animation(path,frame_durations):
             animation_frame_data.append(animation_frame_id)
         n += 1
     return animation_frame_data
-
+# player_action,player_frame = change_action(player_action,player_frame,'run')
 def change_action(action_var,frame,new_value):
     if action_var != new_value:
         action_var = new_value
         frame = 0
     return action_var,frame
         
-
+# player_image = animation_frames[player_animation[player_frame]]
 animation_database = {}
 
 animation_database['run'] = load_animation('./pyweek1/player_animations/run',[7,7])
-animation_database['idle'] = load_animation('./pyweek1/player_animations/idle',[7,7,40])
+animation_database['idle'] = load_animation('./pyweek1/player_animations/idle',[4,5,40])
 
 game_map = {}
 
-
+# game_map[chunk] = generate_chunk(chunk[0],chunk[1])
 grass_img = pygame.image.load('./pyweek1/grass.png')
 dirt_img = pygame.image.load('./pyweek1/dirt.png')
 plant_img = pygame.image.load('./pyweek1/plant.png').convert()
@@ -101,17 +101,17 @@ player_flip = False
 
 grass_sound_timer = 0
 
-player_rect = pygame.Rect(100,100,5,13)
+player_rect = pygame.Rect(150,150,39,40)
 
 background_objects = [[0.25,[120,10,70,400]],[0.25,[280,30,40,400]],[0.5,[30,40,40,400]],[0.5,[130,90,100,400]],[0.5,[300,80,120,400]]]
-
+# [0.5,[30,40,40,400]] means 50% of the screen, 30 pixels from the left, 40 pixels from the top, 40 pixels wide, 400 pixels tall
 def collision_test(rect,tiles):
     hit_list = []
     for tile in tiles:
         if rect.colliderect(tile):
             hit_list.append(tile)
     return hit_list
-
+# rect, collisions = move(rect,movement,tiles)
 def move(rect,movement,tiles):
     collision_types = {'top':False,'bottom':False,'right':False,'left':False}
     rect.x += movement[0]
@@ -153,7 +153,7 @@ while True: # game loop
             pygame.draw.rect(display,(20,170,150),obj_rect)
         else:
             pygame.draw.rect(display,(15,76,73),obj_rect)
-
+#   pygame.draw.rect(display,(7,80,75),pygame.Rect(0,120,300,80))
     tile_rects = []
     for y in range(3):
         for x in range(4):
@@ -215,6 +215,9 @@ while True: # game loop
                 pygame.mixer.music.fadeout(1000)
             if event.key == K_RIGHT:
                 moving_right = True
+            if event.key == K_ESCAPE:
+                pygame.quit()
+                sys.exit()
             if event.key == K_LEFT:
                 moving_left = True
             if event.key == K_UP:
@@ -226,7 +229,7 @@ while True: # game loop
                 moving_right = False
             if event.key == K_LEFT:
                 moving_left = False
-        
+     #   if event.type == MOUSEBUTTONDOWN:   
     screen.blit(pygame.transform.scale(display,WINDOW_SIZE),(0,0))
     pygame.display.update()
     clock.tick(60)

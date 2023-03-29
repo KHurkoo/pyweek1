@@ -30,7 +30,7 @@ def generate_chunk(x,y):
             target_x = x * CHUNK_SIZE + x_pos
             target_y = y * CHUNK_SIZE + y_pos
             tile_type = 0 # nothing
-            height = int(noise.pnoise1(target_x * 0.1, repeat=1) * 5)
+            height = int(noise.pnoise1(target_x * 0.1, repeat=99999999999) * 5)
             if target_y > 8 - height:
                 tile_type = 2 # dirt
             elif target_y == 8 - height:
