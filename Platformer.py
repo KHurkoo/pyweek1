@@ -6,9 +6,7 @@ pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init() # initiates pygame
 pygame.mixer.set_num_channels(64)
 
-pygame.display.set_caption("The hero`s mistake")
-icon=pygame.image.load("./pyweek1/assets/icon.png")
-pygame.display.set_icon(icon)
+pygame.display.set_caption('Pygame Platformer')
 
 WINDOW_SIZE = (600,400)
 
@@ -55,8 +53,8 @@ def load_animation(path,frame_durations):
     n = 0
     for frame in frame_durations:
         animation_frame_id = animation_name + '_' + str(n)
-        img_loc = path + '/' + animation_frame_id + '.gif'
-        # player_animations/idle/idle_0.gif
+        img_loc = path + '/' + animation_frame_id + '.png'
+        # player_animations/idle/idle_0.png
         animation_image = pygame.image.load(img_loc).convert()
         animation_image.set_colorkey((255,255,255))
         animation_frames[animation_frame_id] = animation_image.copy()
@@ -74,15 +72,15 @@ def change_action(action_var,frame,new_value):
 
 animation_database = {}
 
-animation_database['run'] = load_animation('./pyweek1/player_animations/run',[7,7])
-animation_database['idle'] = load_animation('./pyweek1/player_animations/idle',[7,7,40])
+animation_database['run'] = load_animation('player_animations/run',[7,7])
+animation_database['idle'] = load_animation('player_animations/idle',[7,7,40])
 
 game_map = {}
 
 
-grass_img = pygame.image.load('./pyweek1/grass.png')
-dirt_img = pygame.image.load('./pyweek1/dirt.png')
-plant_img = pygame.image.load('./pyweek1/plant.png').convert()
+grass_img = pygame.image.load('grass.png')
+dirt_img = pygame.image.load('dirt.png')
+plant_img = pygame.image.load('plant.png').convert()
 plant_img.set_colorkey((255,255,255))
 
 tile_index = {1:grass_img,
@@ -90,8 +88,8 @@ tile_index = {1:grass_img,
               3:plant_img
               }
 
-jump_sound = pygame.mixer.Sound('./pyweek1/jump.wav')
-grass_sounds = [pygame.mixer.Sound('./pyweek1/grass_0.wav'),pygame.mixer.Sound('./pyweek1/grass_1.wav')]
+jump_sound = pygame.mixer.Sound('jump.wav')
+grass_sounds = [pygame.mixer.Sound('grass_0.wav'),pygame.mixer.Sound('grass_1.wav')]
 grass_sounds[0].set_volume(0.2)
 grass_sounds[1].set_volume(0.2)
 
@@ -230,9 +228,4 @@ while True: # game loop
     screen.blit(pygame.transform.scale(display,WINDOW_SIZE),(0,0))
     pygame.display.update()
     clock.tick(60)
-
-
-
-
-
 

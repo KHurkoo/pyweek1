@@ -16,10 +16,10 @@ class Character:
         surface.blit(self.image, (self.x, self.y))
 
 def create_characters():
-    promo_animated_character = Character("PromoAnimated2x.gif", 0, 0)
-    run_character = Character("__Run.gif", 200, 0)
-    hero_character = Character("hero.gif", 400, 0)
-    other_character = Character("character.gif", 0, 200)
+    promo_animated_character = Character("./pyweek1/assets/PromoAnimated2x.gif", 0, 0)
+    run_character = Character("./pyweek1/assets/__Run.gif", 200, 0)
+    hero_character = Character("./pyweek1/assets/hero.gif", 400, 0)
+    other_character = Character("./pyweek1/assets/hero.gif", 0, 200)
     return [promo_animated_character, run_character, hero_character, other_character]
 
 # Set up the screen
